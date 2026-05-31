@@ -100,6 +100,11 @@ h1,h2{
         <h1>Final Result ❤️</h1>
 
         <p id="resultText"></p>
+        <p id="choicesSummary"></p>
+
+<button onclick="copyResults()">
+    Copy My Answers ❤️
+</button>
 
         <h2>
             So...
@@ -181,24 +186,37 @@ function showResult(){
     document.getElementById("quiz").classList.add("hidden");
     document.getElementById("result").classList.remove("hidden");
 
-    let summary =
-        "So here's what you chose ❤️:\n\n" +
-        "1. " + questions[0].q + "\n→ " + getAnswerText(0, answers[0]) + "\n\n" +
-        "2. " + questions[1].q + "\n→ " + getAnswerText(1, answers[1]) + "\n\n" +
-        "3. " + questions[2].q + "\n→ " + getAnswerText(2, answers[2]);
-
-    document.getElementById("resultText").innerText = summary;
-}
-function showResult(){
-    document.getElementById("quiz").classList.add("hidden");
-    document.getElementById("result").classList.remove("hidden");
-
     let text =
         "According to our highly scientific research 🧪, " +
         "your ideal hang out includes good conversation, fun moments, " +
         "and spending time with someone who'd enjoy your company genuinely. ❤️";
 
     document.getElementById("resultText").innerText = text;
+
+    const summary =
+        "My choices were:\n\n" +
+        "1. " + questions[0][answers[0].toLowerCase()] + "\n" +
+        "2. " + questions[1][answers[1].toLowerCase()] + "\n" +
+        "3. " + questions[2][answers[2].toLowerCase()];
+
+    document.getElementById("choicesSummary").innerHTML =
+        "<br><strong>" +
+        summary.replace(/\n/g,"<br>") +
+        "</strong>";
+}
+    function copyResults(){
+
+    const text =
+        "Hey 😊\n\n" +
+        "My answers were:\n" +
+        "- " + questions[0][answers[0].toLowerCase()] + "\n" +
+        "- " + questions[1][answers[1].toLowerCase()] + "\n" +
+        "- " + questions[2][answers[2].toLowerCase()] + "\n\n" +
+        "Looks like we should make this happen ❤️";
+
+    navigator.clipboard.writeText(text);
+
+    alert("Answers copied! Send them to me ❤️");
 }
 
  
