@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Question for you❤️</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.card{
+    background:white;
+    width:90%;
+    max-width:650px;
+    padding:35px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+button{
+    padding:12px 24px;
+    margin:10px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.option{
+    display:block;
+    width:100%;
+    margin:10px 0;
+}
+
+.yes{
+    background:#4CAF50;
+    color:white;
+}
+
+.no{
+    background:#ff4d6d;
+    color:white;
+}
+
+.hidden{
+    display:none;
+}
+
+h1,h2{
+    color:#ff4d6d;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+
+    <!-- PAGE 1 -->
+    <div id="intro">
+        <h1>Hey, Deniza </h1>
+    <p>
+        Life is full of important decisions...
+        <br><br>
+        So I have one question:
+    </p>
+
+    <h2>Would you like to go out with me? 😊</h2>
+
+        <button class="yes" onclick="startQuiz()">Yes ❤️</button>
+        <button class="no" onclick="alert('Nice try 😄')">Maybe Later</button>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div id="quiz" class="hidden">
+
+        <h2>Perfect! 🎉</h2>
+        <p>Let's discover how you'd like to have a nice time:</p>
+
+        <div id="questionBox">
+            <h3 id="question"></h3>
+
+            <button class="option" onclick="nextQuestion('A')" id="a"></button>
+            <button class="option" onclick="nextQuestion('B')" id="b"></button>
+            <button class="option" onclick="nextQuestion('C')" id="c"></button>
+        </div>
+
+    </div>
+
+    <!-- PAGE 3 -->
+    <div id="result" class="hidden">
+        <h1>Final Result ❤️</h1>
+
+        <p id="resultText"></p>
+
+        <h2>
+            So...
+            <br><br>
+            Would you like to make this happen with me this friday? 😊
+        </h2>
+    </div>
+
+</div>
+
+<script>
+
+const questions = [
+{
+q:"Choose a perfect afternoon:",
+a:"Coffee & talking",
+b:"Walking around town",
+c:"Watching a movie /theatrical performance"
+},
+{
+q:"Pick a snack:",
+a:"Ice cream 🍦",
+b:"beer (not a snack but it hits just right)",
+c:"Dessert 🍰"
+},
+{
+q:"What sounds most fun?",
+a:"Drinking beer together and listening to good music",
+b:"Exploring new places",
+c:"Relaxing and chatting"
+}
+];
+
+let current = 0;
+let answers = [];
+
+function startQuiz(){
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    loadQuestion();
+}
+
+function loadQuestion(){
+    document.getElementById("question").innerText =
+        questions[current].q;
+
+    document.getElementById("a").innerText =
+        questions[current].a;
+
+    document.getElementById("b").innerText =
+        questions[current].b;
+
+    document.getElementById("c").innerText =
+        questions[current].c;
+}
+
+function nextQuestion(choice){
+
+    answers.push(choice);
+    current++;
+
+    if(current < questions.length){
+        loadQuestion();
+    }else{
+        showResult();
+    }
+}
+function getAnswerText(questionIndex, choice) {
+    const q = questions[questionIndex];
+
+    if (choice === "A") return q.a;
+    if (choice === "B") return q.b;
+    if (choice === "C") return q.c;
+
+    return "";
+}
+function showResult(){
+
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    let summary =
+        "So here's what you chose ❤️:\n\n" +
+        "1. " + questions[0].q + "\n→ " + getAnswerText(0, answers[0]) + "\n\n" +
+        "2. " + questions[1].q + "\n→ " + getAnswerText(1, answers[1]) + "\n\n" +
+        "3. " + questions[2].q + "\n→ " + getAnswerText(2, answers[2]);
+
+    document.getElementById("resultText").innerText = summary;
+}
+function showResult(){
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("result").classList.remove("hidden");
+
+    let text =
+        "According to our highly scientific research 🧪, " +
+        "your ideal hang out includes good conversation, fun moments, " +
+        "and spending time with someone who'd enjoy your company genuinely. ❤️";
+
+    document.getElementById("resultText").innerText = text;
+}
+
+ 
+</script>
+
+</body>
+</html>
